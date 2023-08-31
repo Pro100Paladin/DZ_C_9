@@ -1,43 +1,37 @@
-﻿// Задача 66: Задайте значения M и N. 
-// Напишите программу, которая найдёт сумму натуральных элементов в промежутке от M до N.
-// M = 1; N = 15 -> 120
-// M = 4; N = 8. -> 30
+﻿// Задача 68: Напишите программу вычисления функции Аккермана с помощью рекурсии. Даны два неотрицательных числа m и n.
+// m = 2, n = 3 -> A(m,n) = 9
+// m = 3, n = 2 -> A(m,n) = 29
 
 
-Console.Write("Введите начальное целое число M нижнего дипазона значений: ");
-int M = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите число m: ");
+int m = Math.Abs(Convert.ToInt32(Console.ReadLine()));
 
-if (M < 1) M = 1;
+Console.Write("Введите число n: ");
+int n = Math.Abs(Convert.ToInt32(Console.ReadLine()));
 
-Console.Write("Введите конечное целое число N верхнего дипазона значений: ");
-int N = Convert.ToInt32(Console.ReadLine());
+AkkermanFunction(m,n);
 
-if (N < 1)
+
+// вызов функции Аккермана
+void AkkermanFunction(int m, int n)
 {
-    Console.Write("В заданном Вами диапазоне отсутствуют натуральные числа");
+    Console.WriteLine(Akk(m, n)); 
 }
-else
+
+// функция Аккермана
+int Akk(int m, int n)
 {
-
-    SumFromMToN(M, N);
-
-    // вызов функции "сумма чисел от M до N"
-    void SumFromMToN(int m, int n)
+    if (m == 0)
     {
-        Console.Write("Сумма натуральных чисел в заданном диапазоне: " + SumMN(M - 1, N));
+        return n + 1;
     }
-
-    // функция сумма чисел от M до N
-    int SumMN(int M, int N)
+    else if (n == 0 && m > 0)
     {
-        int result = M;
-        if (M == N)
-            return 0;
-        else
-        {
-            M++;
-            result = M + SumMN(M, N);
-            return result;
-        }
+        return Akk(m - 1, 1);
+    }
+    else
+    {
+        return (Akk(m - 1, Akk(m, n - 1)));
     }
 }
+
